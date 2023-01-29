@@ -8,6 +8,8 @@ console.log('Listening on port 8000');
 let indexRouter = require('./routes/index');
 let usersRouter = require('./routes/userInfo');
 let userPassword = require('./routes/userPassword');
+let collectionRouter = require('./routes/collection');
+
 
 let app = express();
 
@@ -20,5 +22,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/userinfo', usersRouter);
 app.use('/userpassword', userPassword);
+app.use('/collection', collectionRouter);
 
 module.exports = app;
