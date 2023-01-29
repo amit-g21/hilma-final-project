@@ -9,6 +9,8 @@ let indexRouter = require('./routes/index');
 let usersRouter = require('./routes/userInfo');
 let userPassword = require('./routes/userPassword');
 let collectionRouter = require('./routes/collection');
+let variantRouter = require('./routes/variant');
+
 
 
 let app = express();
@@ -23,5 +25,6 @@ app.use('/', indexRouter);
 app.use('/userinfo', usersRouter);
 app.use('/userpassword', userPassword);
 app.use('/collection', collectionRouter);
+app.use('/variant', variantRouter);
 
 module.exports = app;
