@@ -1,12 +1,27 @@
-import logo from './logo.svg';
+import 'mdb-react-ui-kit/dist/css/mdb.min.css';
+import "@fortawesome/fontawesome-free/css/all.min.css";
 import './App.css';
-import NavBar from './Components/navBar';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import Login from './components/login';
+import SignUp from './components/signUp';
+
 
 function App() {
   return (
-    <div className="App">
-    <NavBar />
-    </div>
+    
+      <Router>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/signUp" element={<SignUp />} />
+          {/* <Route path="/:username/homePage" element={<HomePage />} >
+            <Route path="/:username/homePage/info" element={<Info />} />
+            <Route path="/:username/homePage/posts" element={<Posts />} />
+            <Route path="/:username/homePage/todos" element={<Todos />} />
+          </Route> */}
+        </Routes>
+      </Router>
+    
+
   );
 }
 
