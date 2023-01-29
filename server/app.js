@@ -12,6 +12,9 @@ let collectionRouter = require('./routes/collection');
 let variantRouter = require('./routes/variant');
 let productRouter = require('./routes/product');
 let orderRouter = require('./routes/orderItems');
+let actionRouter = require('./routes/action');
+let purchasedProductRouter = require('./routes/purchasedProduct');
+
 
 let app = express();
 
@@ -28,5 +31,7 @@ app.use('/collection', collectionRouter);
 app.use('/variant', variantRouter);
 app.use('/product', productRouter);
 app.use('/order', orderRouter);
+app.use('/action', actionRouter);
+app.use('/purchasedProduct', purchasedProductRouter);
 
 module.exports = app;
