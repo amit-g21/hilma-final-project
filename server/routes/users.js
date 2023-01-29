@@ -1,9 +1,15 @@
 var express = require('express');
 var router = express.Router();
+let connection = require('../modules/connection');
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
+
+router.post('/', function({body}, res, next) {
+  console.log(body);
+  let query = `INSERT INTO user (username, full_name ,phone_number,email,birth_date,address,is_admin ) VALUES ('${body.username}','${body.full_name}','${body.phone_number}','${body.email}', DATE '${body.birth_date}','${body.address}',${body.is_admin})`;
+  connection.query(query, function(err, result) {
+    if (err) throw err;
+    res.send('added user');
+  })
+})
 
 module.exports = router;
