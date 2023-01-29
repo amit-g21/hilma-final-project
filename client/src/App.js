@@ -1,24 +1,27 @@
-import logo from './logo.svg';
+import 'mdb-react-ui-kit/dist/css/mdb.min.css';
+import "@fortawesome/fontawesome-free/css/all.min.css";
 import './App.css';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import Login from './components/login';
+import SignUp from './components/signUp';
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    
+      <Router>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/signUp" element={<SignUp />} />
+          {/* <Route path="/:username/homePage" element={<HomePage />} >
+            <Route path="/:username/homePage/info" element={<Info />} />
+            <Route path="/:username/homePage/posts" element={<Posts />} />
+            <Route path="/:username/homePage/todos" element={<Todos />} />
+          </Route> */}
+        </Routes>
+      </Router>
+    
+
   );
 }
 
