@@ -5,6 +5,7 @@ let logger = require('morgan');
 
 console.log('Listening on port 8000');
 
+let cors = require('cors');
 let indexRouter = require('./routes/index');
 let usersRouter = require('./routes/userInfo');
 let userPassword = require('./routes/userPassword');
@@ -19,12 +20,12 @@ let validateLogin = require('./routes/validateLogin');
 
 let app = express();
 
+app.use(cors());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
 app.use('/', indexRouter);
 app.use('/userinfo', usersRouter);
 app.use('/userpassword', userPassword);
@@ -34,6 +35,6 @@ app.use('/product', productRouter);
 app.use('/order', orderRouter);
 app.use('/action', actionRouter);
 app.use('/purchasedProduct', purchasedProductRouter);
-app.use('/login', validateLogin)
+app.use('/login', validateLogin);
 
 module.exports = app;

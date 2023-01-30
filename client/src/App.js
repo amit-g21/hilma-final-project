@@ -14,7 +14,10 @@ function App() {
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/signUp" element={<SignUp />} />
-          <Route path='/home' element={<Home />} />
+          <Route path='/home' element={<Home />} >
+            <Route path='/home/:collection' element={<Home />}   />
+          </Route>
+          {/* <Route path='/collections/:collectionName' */}
           {/* <Route path="/:username/homePage" element={<HomePage />} >
             <Route path="/:username/homePage/info" element={<Info />} />
             <Route path="/:username/homePage/posts" element={<Posts />} />

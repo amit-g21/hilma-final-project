@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
 import "../clientCss/navbar.css";
+import Home from "./HomePage";
 
 function Navbar() {
   return (
-    <nav id="menu-container">
-      <div class="navbar">
+      <div id="navbar">
         <div>
-          <Link to={Navbar}>Home</Link>
+          <Link to={'/home'}>Home</Link>
         </div>
         <div>
           <Link to={Navbar}>
@@ -20,7 +20,6 @@ function Navbar() {
           <Link to={Navbar}>contact</Link>
         </div>
       </div>
-    </nav>
   );
 }
 

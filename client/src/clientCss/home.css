@@ -1,0 +1,20 @@
+.collections-menu {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.collection{
+    width: 50vw;
+    height: 10vh;
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    height: 35vh;
+    width: 40vw;
+}
+
+.collection-header{
+    padding-bottom: 2vh;
+}
