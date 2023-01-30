@@ -29,7 +29,7 @@ function Home() {
       <Navbar />
       <img id="banner-image" src="/images/homeBanner.png" />
       <h3>Shop Our Collections:</h3>
-
+      
       <div className="collections-menu">
         {collections.map((collection) => {
           return <Collection key={collection.id} collection={collection} />;

@@ -7,7 +7,7 @@ function ToCollection(props) {
   const Navigate = useNavigate();
 
   return (
-    <div className="collections-menu" onClick={() => Navigate(`${collection.collection_name}`)}>
+    <div className="collections-menu" onClick={() => Navigate(`${collection.id}`)}>
       <div className="collection" key={collection.id}>
         <h4 className="collection-header">{collection.collection_name}</h4>
         <img src={collection.image_url} />
