@@ -1,4 +1,4 @@
-import React from 'react';
+import React , {useState} from 'react';
 import { Link, useParams, useNavigate, Outlet } from 'react-router-dom';
 import '../index.css'
 
@@ -17,6 +17,9 @@ import {
 
 export default function Login() {
 
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+
     const navigate = useNavigate()
 
     const signUp = () => {
@@ -24,21 +27,22 @@ export default function Login() {
     }
 
     const handleSubmit  = async (e) => {
-        e.preventDefault();
-        const data = await fetch('http://localhost:8000/users/login', {
+        const data = await fetch('http://localhost:8000/login/', {
             method:'POST',
             headers:{'Content-Type': 'application/json'},
             body:JSON.stringify({
-                username:username,
+                userName:username,
                 password: password
             })
         })
         const json = await data.json();
         console.log(json);
-        if(json){
-            localStorage.setItem('onlineUser', JSON.stringify({username:json[0].username , user_id:json[0].user_id}))
-            setUser(json[0].username);
-            navigate(`/${user}/homePage`);
+        if(json.length > 0) {
+            console.log(json);
+            // localStorage.setItem('onlineUser', JSON.stringify({username:json[0].username , user_id:json[0].user_id}))
+            // setUser(json[0].username);
+            
+            navigate(`/home`);
         }else{
             alert('user not found')
         }
@@ -57,15 +61,15 @@ export default function Login() {
 
                         <h2 className="fw-bold mb-5">Sign in </h2>
 
-                            <MDBInput wrapperClass='mb-4' label='Email address' id='form1' type='email' />
-                            <MDBInput wrapperClass='mb-4' label='Password' id='form2' type='password' />
+                            <MDBInput wrapperClass='mb-4' label='username' id='form1' type='username' value={username} onChange={e => setUsername(e.target.value)} />
+                            <MDBInput wrapperClass='mb-4' label='Password' id='form2' type='password' value={password} onChange={e => setPassword(e.target.value)}/>
 
                             <div className="d-flex justify-content-between mx-4 mb-4">
                                 <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' label='Remember me' />
                                 <a href="!#">Forgot password?</a>
                             </div>
 
-                            <MDBBtn onclick={handleSubmit} className="mb-4 w-100">Sign in</MDBBtn>
+                            <MDBBtn onClick={handleSubmit} className="mb-4 w-100">Sign in</MDBBtn>
 
                             <MDBBtn onClick={signUp} className="mb-4 w-100">Sign up</MDBBtn>
 
@@ -75,7 +79,7 @@ export default function Login() {
                 </MDBCol>
 
                 <MDBCol col='6' className='h-100'>
-                    <img src="https://mdbootstrap.com/img/new/ecommerce/vertical/004.jpg" class="h-100 rounded-4 shadow-4"
+                    <img src="/images/loginImg.jpg" className="h-100 rounded-4 shadow-4"
                         alt="" fluid />
                 </MDBCol>
             </MDBRow>

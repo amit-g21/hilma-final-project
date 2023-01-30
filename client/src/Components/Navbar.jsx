@@ -4,7 +4,7 @@ import "../clientCss/navbar.css";
 function Navbar() {
   return (
     <nav id="menu-container">
-      <div class="navbar">
+      <div id="navbar">
         <div>
           <Link to={Navbar}>Home</Link>
         </div>

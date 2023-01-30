@@ -15,9 +15,12 @@ let orderRouter = require('./routes/orderItems');
 let actionRouter = require('./routes/action');
 let purchasedProductRouter = require('./routes/purchasedProduct');
 let validateLogin = require('./routes/validateLogin');
+var cors = require('cors');
 
 
 let app = express();
+
+app.use(cors());
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -35,5 +38,7 @@ app.use('/order', orderRouter);
 app.use('/action', actionRouter);
 app.use('/purchasedProduct', purchasedProductRouter);
 app.use('/login', validateLogin)
+
+
 
 module.exports = app;
