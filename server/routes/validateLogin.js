@@ -9,8 +9,12 @@ router.post("/", function ({ body }, res, next) {
   console.log(body);
   let sql = `SELECT * FROM user JOIN user_password on user_password.user_id = user.id WHERE username = '${body.userName}' AND password = '${body.password}'`;
   connection.query(sql, function (err, result) {
+    if(result.length > 0){
+      res.send(result);
+    }else{
+      res.status(401).send(false);
+    }
     if (err) throw err;
-    res.send(result);
   });
 });
 

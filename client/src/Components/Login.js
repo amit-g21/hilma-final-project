@@ -1,4 +1,4 @@
-import React from 'react';
+import React , {useState} from 'react';
 import { Link, useParams, useNavigate, Outlet } from 'react-router-dom';
 import '../index.css'
 
@@ -17,31 +17,59 @@ import {
 
 export default function Login() {
 
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+
     const navigate = useNavigate()
 
     const signUp = () => {
         navigate('/signup')
     }
 
-    return (
-        <MDBContainer fluid className='my-5' style={{height: 'calc(100vh - 6rem)'}}>
+    const handleSubmit  = async (e) => {
+        const data = await fetch('http://localhost:8000/login/', {
+            method:'POST',
+            headers:{'Content-Type': 'application/json'},
+            body:JSON.stringify({
+                userName:username,
+                password: password
+            })
+        })
+        const json = await data.json();
+        console.log(json);
+        if(json.length > 0) {
+            console.log(json);
+            // localStorage.setItem('onlineUser', JSON.stringify({username:json[0].username , user_id:json[0].user_id}))
+            // setUser(json[0].username);
+            
+            navigate(`/home`);
+        }else{
+            alert('user not found')
+        }
 
-            <MDBRow className='g-0 align-items-center'>
+    }
+
+    return (
+        <MDBContainer fluid className='my-5' style={{ height: 'calc(100vh - 6rem)' }}>
+
+            <MDBRow className='g-0 align-items-center h-100'>
 
                 <MDBCol col='6'>
 
                     <MDBCard className='my-5 cascading-right' style={{ background: 'hsla(0, 0%, 100%, 0.55)', backdropFilter: 'blur(30px)' }}>
                         <MDBCardBody className='p-5 text-center'>
 
-                            <MDBInput wrapperClass='mb-4' label='Email address' id='form1' type='email' />
-                            <MDBInput wrapperClass='mb-4' label='Password' id='form2' type='password' />
+                        <h2 className="fw-bold mb-5">Sign in </h2>
+
+                            <MDBInput wrapperClass='mb-4' label='username' id='form1' type='username' value={username} onChange={e => setUsername(e.target.value)} />
+                            <MDBInput wrapperClass='mb-4' label='Password' id='form2' type='password' value={password} onChange={e => setPassword(e.target.value)}/>
 
                             <div className="d-flex justify-content-between mx-4 mb-4">
                                 <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' label='Remember me' />
                                 <a href="!#">Forgot password?</a>
                             </div>
 
-                            <MDBBtn className="mb-4 w-100">Sign in</MDBBtn>
+                            <MDBBtn onClick={handleSubmit} className="mb-4 w-100">Sign in</MDBBtn>
 
                             <MDBBtn onClick={signUp} className="mb-4 w-100">Sign up</MDBBtn>
 
@@ -50,8 +78,8 @@ export default function Login() {
                     </MDBCard>
                 </MDBCol>
 
-                <MDBCol col='6'>
-                    <img src="https://mdbootstrap.com/img/new/ecommerce/vertical/004.jpg" class="w-100  rounded-4 shadow-4"
+                <MDBCol col='6' className='h-100'>
+                    <img src="/images/loginImg.jpg" className="h-100 rounded-4 shadow-4"
                         alt="" fluid />
                 </MDBCol>
             </MDBRow>
