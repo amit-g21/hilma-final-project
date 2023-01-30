@@ -3,7 +3,7 @@ let path = require('path');
 let cookieParser = require('cookie-parser');
 let logger = require('morgan');
 
-console.log('Listening on port 8000');
+console.log('Listening on port 8000..');
 
 let cors = require('cors');
 let indexRouter = require('./routes/index');
@@ -16,7 +16,6 @@ let orderRouter = require('./routes/orderItems');
 let actionRouter = require('./routes/action');
 let purchasedProductRouter = require('./routes/purchasedProduct');
 let validateLogin = require('./routes/validateLogin');
-var cors = require('cors');
 
 
 let app = express();
