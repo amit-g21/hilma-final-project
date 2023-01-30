@@ -23,15 +23,39 @@ export default function Login() {
         navigate('/signup')
     }
 
-    return (
-        <MDBContainer fluid className='my-5' style={{height: 'calc(100vh - 6rem)'}}>
+    const handleSubmit  = async (e) => {
+        e.preventDefault();
+        const data = await fetch('http://localhost:8000/users/login', {
+            method:'POST',
+            headers:{'Content-Type': 'application/json'},
+            body:JSON.stringify({
+                username:username,
+                password: password
+            })
+        })
+        const json = await data.json();
+        console.log(json);
+        if(json){
+            localStorage.setItem('onlineUser', JSON.stringify({username:json[0].username , user_id:json[0].user_id}))
+            setUser(json[0].username);
+            navigate(`/${user}/homePage`);
+        }else{
+            alert('user not found')
+        }
 
-            <MDBRow className='g-0 align-items-center'>
+    }
+
+    return (
+        <MDBContainer fluid className='my-5' style={{ height: 'calc(100vh - 6rem)' }}>
+
+            <MDBRow className='g-0 align-items-center h-100'>
 
                 <MDBCol col='6'>
 
                     <MDBCard className='my-5 cascading-right' style={{ background: 'hsla(0, 0%, 100%, 0.55)', backdropFilter: 'blur(30px)' }}>
                         <MDBCardBody className='p-5 text-center'>
+
+                        <h2 className="fw-bold mb-5">Sign in </h2>
 
                             <MDBInput wrapperClass='mb-4' label='Email address' id='form1' type='email' />
                             <MDBInput wrapperClass='mb-4' label='Password' id='form2' type='password' />
@@ -41,7 +65,7 @@ export default function Login() {
                                 <a href="!#">Forgot password?</a>
                             </div>
 
-                            <MDBBtn className="mb-4 w-100">Sign in</MDBBtn>
+                            <MDBBtn onclick={handleSubmit} className="mb-4 w-100">Sign in</MDBBtn>
 
                             <MDBBtn onClick={signUp} className="mb-4 w-100">Sign up</MDBBtn>
 
@@ -50,8 +74,8 @@ export default function Login() {
                     </MDBCard>
                 </MDBCol>
 
-                <MDBCol col='6'>
-                    <img src="https://mdbootstrap.com/img/new/ecommerce/vertical/004.jpg" class="w-100  rounded-4 shadow-4"
+                <MDBCol col='6' className='h-100'>
+                    <img src="https://mdbootstrap.com/img/new/ecommerce/vertical/004.jpg" class="h-100 rounded-4 shadow-4"
                         alt="" fluid />
                 </MDBCol>
             </MDBRow>

@@ -14,9 +14,9 @@ from 'mdb-react-ui-kit';
 
 export default function SignUp() {
   return (
-    <MDBContainer fluid className='my-5'>
+    <MDBContainer fluid className='my-5' style={{ height: 'calc(100vh - 6rem)' }}>
 
-      <MDBRow className='g-0 align-items-center'>
+      <MDBRow className='g-0 align-items-center h-100'>
         <MDBCol col='6'>
 
           <MDBCard className='my-5 cascading-right' style={{background: 'hsla(0, 0%, 100%, 0.55)',  backdropFilter: 'blur(30px)'}}>
@@ -69,8 +69,8 @@ export default function SignUp() {
           </MDBCard>
         </MDBCol>
 
-        <MDBCol col='6'>
-          <img src="https://mdbootstrap.com/img/new/ecommerce/vertical/004.jpg" class="w-100 rounded-4 shadow-4"
+        <MDBCol col='6' className='h-100'>
+          <img src="https://mdbootstrap.com/img/new/ecommerce/vertical/004.jpg" class="h-100 rounded-4 shadow-4"
             alt="" fluid/>
         </MDBCol>
 
