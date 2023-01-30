@@ -10,7 +10,7 @@ function ToProduct(props) {
     <div className="collections-menu" >
       <div className="collection" key={product.id}>
         <h4 className="collection-header">{product.product_name}</h4>
-        <img src={product.image_url} />
+        <img src={""} />
       </div>
     </div>
   );
