@@ -10,9 +10,10 @@ function ToCollection(props) {
     <div className="collections-menu" onClick={() => Navigate(`${collection.collection_name}`)}>
       <div className="collection" key={collection.id}>
         <h4 className="collection-header">{collection.collection_name}</h4>
-        <img src={collection.image_url} />
+        <img className="imageHome" src={collection.image_url} />
       </div>
     </div>
+    
   );
 }
 

@@ -1,6 +1,7 @@
 import React , {useState} from 'react';
 import { Link, useParams, useNavigate, Outlet } from 'react-router-dom';
 import '../index.css'
+import Cookies from 'js-cookie';
 
 import {
     MDBBtn,
@@ -41,7 +42,7 @@ export default function Login() {
             console.log(json);
             // localStorage.setItem('onlineUser', JSON.stringify({username:json[0].username , user_id:json[0].user_id}))
             // setUser(json[0].username);
-            
+            Cookies.set('onlineUser' , JSON.stringify(json[0].username));
             navigate(`/home`);
         }else{
             alert('user not found')

@@ -1,11 +1,17 @@
 
 import { useEffect, useState } from "react";
 import "../clientCss/home.css";
-import Collection from "./Small Components/ToCollection";
+import ToCollection from "./Small Components/ToCollection";
 import LoadingLogo from "./Small Components/LoadingLogo";
 import Navbar from "./Navbar";
+import Footer from "./Footer";
+
+
 
 function Home() {
+
+
+
   const [collections, editCollections] = useState([]);
 
   async function getCollections() {
@@ -27,14 +33,15 @@ function Home() {
   return (
     <div>
       <Navbar />
-      <img id="banner-image" src="/images/homeBanner.png" />
-      <h3>Shop Our Collections:</h3>
+        <img id="banner-image" src="/images/homeBanner.png" />
+        <h3>Shop Our Collections:</h3>
 
-      <div className="collections-menu">
-        {collections.map((collection) => {
-          return <Collection key={collection.id} collection={collection} />;
-        })}
-      </div>
+        <div className="collections-menu">
+          {collections.map((collection) => {
+            return <ToCollection key={collection.id} collection={collection} />;
+          })}
+        </div>
+      <Footer />
     </div>
   );
 }

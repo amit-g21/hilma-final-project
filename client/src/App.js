@@ -4,7 +4,8 @@ import './App.css';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Login from './Components/Login';
 import SignUp from './Components/SignUp';
-import Home from './Components/HomePage'
+import Home from './Components/HomePage';
+import GetProductCollections from './Components/collectionProducts';
 
 
 function App() {
@@ -14,9 +15,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/signUp" element={<SignUp />} />
-          <Route path='/home' element={<Home />} >
-            <Route path='/home/:collection' element={<Home />}   />
-          </Route>
+          <Route path='/home' element={<Home />} />
+          <Route path='/home/:collection' element={<GetProductCollections />}   />
           {/* <Route path='/collections/:collectionName' */}
           {/* <Route path="/:username/homePage" element={<HomePage />} >
             <Route path="/:username/homePage/info" element={<Info />} />
