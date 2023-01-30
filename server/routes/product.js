@@ -5,7 +5,7 @@ let connection = require('../modules/connection');
 
 router.post('/', function({body}, res, next) {
   console.log(body);
-  let sql = `INSERT INTO product (collection_id, product_name , price , description , image_url) VALUES (${body.collectionId},'${body.productName}' , ${body.price} , '${body.description}' , '${body.imageUrl}')`;
+  let sql = `INSERT INTO product (collection_id, product_name , price , product_description , image_url) VALUES (${body.collectionId},'${body.productName}' , ${body.price} , '${body.description}' , '${body.imageUrl}')`;
   connection.query(sql, function(err, result) {
     if (err) throw err;
     res.send('producr added');
