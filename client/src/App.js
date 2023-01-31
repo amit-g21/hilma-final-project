@@ -8,6 +8,7 @@ import Home from './Components/HomePage';
 import GetProductCollections from './Components/collectionProducts';
 import ProductPage from "./Components/ProductPage";
 import CheckOutPage from "./Components/CheckOutPage";
+import AdminHome from "./Components/Admin";
 
 function App() {
   return (
@@ -21,12 +22,10 @@ function App() {
         <Route path='/home/:collection' element={<GetProductCollections />} />
         <Route path='/checkout' element={<CheckOutPage />} />
 
-        {/* <Route path='/collections/:collectionName' */}
-        {/* <Route path="/:username/homePage" element={<HomePage />} >
-            <Route path="/:username/homePage/info" element={<Info />} />
-            <Route path="/:username/homePage/posts" element={<Posts />} />
-            <Route path="/:username/homePage/todos" element={<Todos />} />
-          </Route> */}
+
+        {/* ADMIN ROUTES */}
+        <Route path='admin/:username' element={<AdminHome />} />
+
       </Routes>
     </Router>
   );
