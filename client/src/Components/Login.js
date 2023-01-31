@@ -81,7 +81,7 @@ export default function Login() {
 
                 <MDBCol col='6' className='h-100'>
                     <img src="/images/loginImg.jpg" className="h-100 rounded-4 shadow-4"
-                        alt="" fluid />
+                        alt="" fluid style={{marginRight:30 + '%'}} />
                 </MDBCol>
             </MDBRow>
 

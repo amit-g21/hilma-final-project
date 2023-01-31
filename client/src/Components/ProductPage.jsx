@@ -103,7 +103,7 @@ function ProductPage() {
     let variantSize = size;
     let newVariants = [...variants];
     for(let obj of newVariants){
-        if(obj.variant_color === color && variantSize === obj.variant_size){
+        if(obj.variant_color === color && variantSize === obj.variant_size && obj.variant_quantity > 0){
             return true;
         }
     }
