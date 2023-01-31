@@ -34,25 +34,97 @@
     margin: 0;
   } */
 
+.cartProduct {
+  display: flex;
+  justify-content: space-between;
+}
+
+.cartParagraph {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+#productName {
+  font-weight: bold;
+}
+
 .cartNav {
   height: 100%;
   background-color: orange;
   position: relative;
   display: inline-block;
   cursor: pointer;
+
+}
+
+.userHello {
+  width: 18%;
+  display: flex;
+  align-items: center;
+
+}
+
+.pHello{
+  font-size: 19px;
+  margin: 0;
+}
+
+.logOut {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 15%;
+}
+
+.userLog {
+  display: flex;
+  justify-content: flex-end;
+  width: 60%;
 }
 
 .shopping-cart-icon {
   height: 100%;
 }
 
+/* CHANGE CONTENT HERE */
+.shopping-cart-content p {
+  float: left;
+
+}
+
+
 .cart-window {
+  text-align: center;
+  cursor: auto;
   background-color: #fff;
   border: 1px solid #ddd;
+  color: black;
   position: absolute;
   right: 0;
   top: 60px;
   width: 300px;
   z-index: 10;
   padding: 10px;
+}
+
+
+#XContainer {
+  height: 1.3vh;
+}
+
+#XContainer img {
+  height: 100%;
+  cursor: pointer;
+}
+
+.cartImageContainer {
+  display: flex;
+  align-items: center;
+
+  height: 13vh;
+}
+
+#productImage {
+  height: 100%;
 }

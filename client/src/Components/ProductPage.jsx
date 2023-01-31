@@ -5,7 +5,6 @@ import { useLocation } from "react-router-dom";
 import LoadingLogo from "./Small Components/LoadingLogo";
 import "../clientCss/productPage.css";
 import Footer from "./Footer";
-import ShoppingCart from './shoppingCart'
 
 function ProductPage() {
   const [product, setProduct] = useState([]);
@@ -19,6 +18,8 @@ function ProductPage() {
   const [isClickedSize, setClickedSize] = useState("");
   const [orderQuantity, setOrderQuantity] = useState(1);
   const [showCart, toggleShowCart] = useState(false);
+  const [refreshCart, toggleRefreshCart] = useState(false)
+
 
   let location = useLocation();
 
@@ -106,6 +107,7 @@ function ProductPage() {
       setTimeout(() => {
         toggleShowCart(false)
       }, 2000);
+      toggleRefreshCart(!refreshCart);
   }
 
   useEffect(() => {
@@ -143,7 +145,7 @@ function ProductPage() {
   return (
     <>
       <div className="productPage">
-        <Navbar showCart = {showCart}/>
+        <Navbar refreshCart={refreshCart} showCart = {showCart}/>
         <div className="imageContainer">
           <img src={`${image_url}`} />
         </div>
