@@ -69,6 +69,7 @@
 
 
 .cart-window {
+  text-align: center;
   cursor: auto;
   background-color: #fff;
   border: 1px solid #ddd;
@@ -94,6 +95,7 @@
 .cartImageContainer{
  display: flex;
  align-items: center;
+
   height: 13vh;
 }
 

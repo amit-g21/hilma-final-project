@@ -1,40 +1,39 @@
 import React, { useState, useEffect } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
 
 function ShoppingCartDiv(props) {
   let [totalPrice, setTotalPrice] = useState(0);
-  let [sessionStorageItems, setSessionStorageItems] = useState(
-    JSON.parse(sessionStorage.getItem("cart") || [])
-    );
-
-  let navigate = useNavigate();
+  let [sessionStorageItems, setSessionStorageItems] = useState(JSON.parse(sessionStorage.getItem("cart")) || []);
 
   useEffect(() => {
+    if (sessionStorage.getItem('cart')){
     setSessionStorageItems(JSON.parse(sessionStorage.getItem("cart") || []));
     console.log(sessionStorageItems);
     calculateTotalPrice(JSON.parse(sessionStorage.getItem("cart")));
+    } else {
+      sessionStorage.setItem('cart', JSON.stringify([]));
+    }
   }, [props.refreshCart]);
 
-  function navigateToCheckOut(){
-    let obj = JSON.stringify([{totalPrice}, ...sessionStorageItems]);
-    sessionStorage.setItem('checkoutInfo', obj);
-    navigate('checkout')
+  function navigateToCheckOut() {
+    let obj = JSON.stringify([{ totalPrice }, ...sessionStorageItems]);
+    sessionStorage.setItem("checkoutInfo", obj);
+    window.location.assign("/checkout");
   }
 
-  function calculateTotalPrice(storage){
-    let total = 0
-    for (let obj of storage){
-      total += (obj.price * obj.orderQuantity);
+  function calculateTotalPrice(storage) {
+    let total = 0;
+    for (let obj of storage) {
+      total += obj.price * obj.orderQuantity;
       console.log(obj);
     }
-    setTotalPrice(total)
+    setTotalPrice(total);
   }
 
   function deleteFromCart(e) {
     let obj = e.target.name;
     console.log("obj: ", obj);
     let newSessionStorage = [];
-    
+
     let didFind = false;
     for (let cartItem of sessionStorageItems) {
       if (JSON.stringify(cartItem) === obj && !didFind) {
@@ -45,8 +44,8 @@ function ShoppingCartDiv(props) {
     }
     setSessionStorageItems(newSessionStorage);
     sessionStorage.setItem("cart", JSON.stringify(newSessionStorage));
-    calculateTotalPrice(newSessionStorage)
-    }
+    calculateTotalPrice(newSessionStorage);
+  }
 
   return (
     <>

@@ -24,7 +24,7 @@ function ProductPage() {
   let location = useLocation();
 
   let urlArr = location.pathname.split("/");
-  let productName = urlArr[urlArr.length - 1];
+  let productName =  decodeURIComponent(urlArr[urlArr.length - 1])  ;
   let collectionName = urlArr[urlArr.length - 2];
   let { image_url, price, product_description } = product[0] || "waiting";
   console.log("product: ", product);
