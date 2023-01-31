@@ -39,6 +39,7 @@
   background-color: orange;
   position: relative;
   display: inline-block;
+  cursor: pointer;
 }
 
 .shopping-cart-icon {
