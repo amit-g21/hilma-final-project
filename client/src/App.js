@@ -7,7 +7,7 @@ import SignUp from './Components/SignUp';
 import Home from './Components/HomePage';
 import GetProductCollections from './Components/collectionProducts';
 import ProductPage from "./Components/ProductPage";
-
+import CheckOutPage from "./Components/CheckOutPage";
 
 function App() {
   return (
@@ -19,6 +19,8 @@ function App() {
         <Route path='/home' element={<Home />} />
         <Route path='/home/:collection/:productName' element={<ProductPage  />} />
         <Route path='/home/:collection' element={<GetProductCollections />} />
+        <Route path='/checkout' element={<CheckOutPage />} />
+
         {/* <Route path='/collections/:collectionName' */}
         {/* <Route path="/:username/homePage" element={<HomePage />} >
             <Route path="/:username/homePage/info" element={<Info />} />

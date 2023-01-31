@@ -17,3 +17,34 @@
     background-color: rgb(104, 96, 96);
     margin: 10px;
 }
+
+.productPage{
+    height: 100vh;
+}
+
+.imageContainer{
+    margin-top: 10vh;
+    height: 90vh;
+    float: left;
+}
+
+.imageContainer img{
+    height: 70%;
+}
+
+.productPage h2{
+    margin-top: 5vh;
+}
+
+.sizeButtons p, .colorButtons p, #quantityCounter p {
+    margin-top: 3vh;
+    font-weight: bold;
+}
+
+#addToCart, #quantityCounter{
+    margin-top: 3vh;
+}
+
+.productPage{
+    text-align: center;
+}
