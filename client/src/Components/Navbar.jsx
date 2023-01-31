@@ -4,9 +4,9 @@ import "../clientCss/navbar.css";
 import Home from "./HomePage";
 import ShoppingCartIcon from "./shoppingCartIcon";
 
-function Navbar() {
+function Navbar(props) {
   const [navbarOpen, setNavbarOpen] = useState(false);
-
+  
   return (
     <div id="navbar">
       <div>
@@ -21,7 +21,7 @@ function Navbar() {
         <Link to={Navbar}>About</Link>
       </div>
       <div className="cartNav" onClick={() => setNavbarOpen(!navbarOpen)}>
-        {navbarOpen && (
+        {(navbarOpen || props.showCart) &&  (
           <div className="cart-window">
             {/* Render the items in the cart here */}
           </div>

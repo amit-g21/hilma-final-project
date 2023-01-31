@@ -17,6 +17,7 @@ function ProductPage() {
   const [isClickedColor, setClickedColor] = useState("");
   const [isClickedSize, setClickedSize] = useState("");
   const [orderQuantity, setOrderQuantity] = useState(1);
+  const [showCart, toggleShowCart] = useState(false);
 
   let location = useLocation();
 
@@ -99,7 +100,11 @@ function ProductPage() {
       let dataInlocalStorage = JSON.parse(sessionStorage.getItem('cart'));
       dataInlocalStorage.push({productName, price, isClickedColor, isClickedSize, orderQuantity, image_url})
       console.log('dataInlocalStorage: ', dataInlocalStorage);
-      sessionStorage.setItem("cart", JSON.stringify(dataInlocalStorage))
+      sessionStorage.setItem("cart", JSON.stringify(dataInlocalStorage));
+      toggleShowCart(true);
+      setTimeout(() => {
+        toggleShowCart(false)
+      }, 2000);
   }
 
   useEffect(() => {
@@ -137,7 +142,7 @@ function ProductPage() {
   return (
     <>
       <div className="productPage">
-        <Navbar />
+        <Navbar showCart = {showCart}/>
         <div className="imageContainer">
           <img src={`${image_url}`} />
         </div>
