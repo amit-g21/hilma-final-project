@@ -4,6 +4,7 @@ import Navbar from "./Navbar";
 import { useLocation } from "react-router-dom";
 import LoadingLogo from "./Small Components/LoadingLogo";
 import "../clientCss/productPage.css";
+import Footer from "./Footer";
 
 function ProductPage() {
   const [product, setProduct] = useState([]);
@@ -13,8 +14,9 @@ function ProductPage() {
   const [variantColors, setVariantColors] = useState([]);
   console.log("variantColors: ", variantColors);
   const [variantSizes, setVariantSizes] = useState([]);
-  const [isClickedColor, setClickedColor] = useState('');
-  const [isClickedSize, setClickedSize] = useState('')
+  const [isClickedColor, setClickedColor] = useState("");
+  const [isClickedSize, setClickedSize] = useState("");
+  const [orderQuantity, setOrderQuantity] = useState(1);
 
   let location = useLocation();
 
@@ -35,9 +37,8 @@ function ProductPage() {
   }
 
   function changeColor(color) {
-    setClickedSize('');
+    setClickedSize("");
     setClickedColor(color);
-
   }
 
   async function getVariants(id) {
@@ -50,6 +51,14 @@ function ProductPage() {
     example.variant_color ? setColor(true) : setColor(false);
     example.variant_size ? setSize(true) : setSize(false);
     return result;
+  }
+
+  function decreaseQuantity(quantity){
+    if (quantity <= 1){
+        return 1
+    } else{
+        setOrderQuantity(orderQuantity - 1);
+    }
   }
 
   function makeButton(result) {
@@ -83,6 +92,16 @@ function ProductPage() {
     setVariantColors(newVariantsColors);
   }
 
+// sessionStorage.setItem("cart", "{productName: abc, productPrice}");
+
+  function addToCart() {
+      sessionStorage.getItem('cart') === null && sessionStorage.setItem('cart', JSON.stringify([]))
+      let dataInlocalStorage = JSON.parse(sessionStorage.getItem('cart'));
+      dataInlocalStorage.push({productName, price, isClickedColor, isClickedSize, orderQuantity, image_url})
+      console.log('dataInlocalStorage: ', dataInlocalStorage);
+      sessionStorage.setItem("cart", JSON.stringify(dataInlocalStorage))
+  }
+
   useEffect(() => {
     const fetchDbs = async () => {
       let product = await getProduct(productName, collectionName);
@@ -100,36 +119,76 @@ function ProductPage() {
 
   function findSizes(size) {
     let color = isClickedColor;
+    console.log('isClickedColor: ', isClickedColor);
     let variantSize = size;
     let newVariants = [...variants];
-    for(let obj of newVariants){
-        if(obj.variant_color === color && variantSize === obj.variant_size && obj.variant_quantity > 0){
-            return true;
-        }
+    for (let obj of newVariants) {
+      if (
+        obj.variant_color === color &&
+        variantSize === obj.variant_size &&
+        obj.variant_quantity > 0
+      ) {
+        return true;
+      }
     }
     return false;
-}
+  }
 
   return (
-    <div className="productPage">
-      <Navbar />
-      <h1>{productName}</h1>
-      <img src={`${image_url}`} />
-      <h3>${`${price}`}</h3>
-      <p>{product_description}</p>
-      {isColor && (
-        <div className="colorButtons">
-          <p>Colors:</p>
-          {variantColors.map((color) => (
-            <button className={isClickedColor===color ? 'clickedColor' : '' } onClick={() => changeColor(color)} key={Math.random() * 0.5}>{color}</button>
-          ))}
-          <p>Sizes:</p>
-          {variantSizes.map((size) => (
-            <button className={`${findSizes(size) ? '' : 'notAvailable'} ${isClickedSize === size ? 'clickedSize' : ''}`} onClick={() => setClickedSize(size)} key={Math.random() * 0.5}>{size}</button>
-          ))}
+    <>
+      <div className="productPage">
+        <Navbar />
+        <div className="imageContainer">
+          <img src={`${image_url}`} />
         </div>
-      )}
-    </div>
+        <h2>{productName}</h2>
+        <hr />
+        <h3>Price: ${`${price}`}</h3>
+        <p>{product_description}</p>
+        <div className="Buttons">
+          {isColor && (
+            <div className="colorButtons">
+              <p>Colors:</p>
+              {variantColors.map((color) => (
+                <button
+                  className={isClickedColor === color ? "clickedColor" : ""}
+                  onClick={() => changeColor(color)}
+                  key={Math.random() * 0.5}
+                >
+                  {color}
+                </button>
+              ))}
+            </div>
+          )}
+          {isSize && (
+            <div className="sizeButtons">
+              <p>Sizes:</p>
+              {variantSizes.map((size) => (
+                <button
+                  className={`${findSizes(size) ? "" : "notAvailable"} ${
+                    isClickedSize === size ? "clickedSize" : ""
+                  }`}
+                  onClick={() => setClickedSize(size)}
+                  key={Math.random() * 0.5}
+                >
+                  {size}
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+        <div id="quantityCounter">
+        <p>Quantity:</p>
+          <button onClick={() => decreaseQuantity(orderQuantity)}>-</button>
+          <span id="count">{orderQuantity}</span>
+          <button onClick={() => setOrderQuantity(orderQuantity + 1)}>+</button>
+        </div>
+        <button id="addToCart" onClick={addToCart}>
+          Add To Cart
+        </button>
+      </div>
+      <Footer />
+    </>
   );
 }
 
