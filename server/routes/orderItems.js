@@ -6,7 +6,7 @@ let connection = require("../modules/connection");
 
 router.post("/", function ({ body }, res, next) {
   console.log(body);
-  let sql = `INSERT INTO order_items ( date, total_price, products_quantity ,city , card_number , order_number) VALUES ('${body.date}', ${body.totalPrice}, ${body.orderQuantity} , '${body.city}' , '${body.cardNumber}' , '${body.orderNumber}')`;
+  let sql = `INSERT INTO order_items (full_name , date, total_price, products_quantity ,city , card_number , order_number) VALUES ('${body.fullName}',  '${body.date}', ${body.totalPrice}, ${body.orderQuantity} , '${body.city}' , '${body.cardNumber}' , '${body.orderNumber}')`;
   connection.query(sql, function (err, result) {
     if (err) throw err;
     res.send("order saved to DB");
