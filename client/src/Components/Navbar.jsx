@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "../clientCss/navbar.css";
 import Home from "./HomePage";
+import ShoppingCartDiv from "./ShoppingCartDiv";
 import ShoppingCartIcon from "./shoppingCartIcon";
 
 function Navbar(props) {
@@ -20,12 +21,15 @@ function Navbar(props) {
       <div>
         <Link to={Navbar}>About</Link>
       </div>
-      <div className="cartNav" onClick={() => setNavbarOpen(!navbarOpen)}>
-        {(navbarOpen || props.showCart) &&  (
+      <div>
+        {(navbarOpen || props.showCart) && (
           <div className="cart-window">
-            {/* Render the items in the cart here */}
+            <ShoppingCartDiv  refreshCart={props.refreshCart}/>
           </div>
         )}
+
+      </div>
+      <div className="cartNav" onClick={() => setNavbarOpen(!navbarOpen)}>
         <ShoppingCartIcon />
 
       </div>

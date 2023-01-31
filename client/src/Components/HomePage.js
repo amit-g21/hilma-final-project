@@ -1,17 +1,14 @@
 
 import { useEffect, useState } from "react";
 import "../clientCss/home.css";
+import "../clientCss/navbar.css";
 import ToCollection from "./Small Components/ToCollection";
 import LoadingLogo from "./Small Components/LoadingLogo";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 
 
-
 function Home() {
-
-
-
   const [collections, editCollections] = useState([]);
 
   async function getCollections() {
