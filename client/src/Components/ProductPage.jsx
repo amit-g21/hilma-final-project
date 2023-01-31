@@ -13,7 +13,8 @@ function ProductPage() {
   const [variantColors, setVariantColors] = useState([]);
   console.log("variantColors: ", variantColors);
   const [variantSizes, setVariantSizes] = useState([]);
-  const [selectedVariant, setSelectedVariant] = useState();
+  const [isClickedColor, setClickedColor] = useState('');
+  const [isClickedSize, setClickedSize] = useState('')
 
   let location = useLocation();
 
@@ -31,6 +32,12 @@ function ProductPage() {
     console.log("result: ", result);
     setProduct(result);
     return result;
+  }
+
+  function changeColor(color) {
+    setClickedSize('');
+    setClickedColor(color);
+
   }
 
   async function getVariants(id) {
@@ -91,6 +98,18 @@ function ProductPage() {
     return <LoadingLogo />;
   }
 
+  function findSizes(size) {
+    let color = isClickedColor;
+    let variantSize = size;
+    let newVariants = [...variants];
+    for(let obj of newVariants){
+        if(obj.variant_color === color && variantSize === obj.variant_size){
+            return true;
+        }
+    }
+    return false;
+}
+
   return (
     <div className="productPage">
       <Navbar />
@@ -102,11 +121,11 @@ function ProductPage() {
         <div className="colorButtons">
           <p>Colors:</p>
           {variantColors.map((color) => (
-            <button key={Math.random() * 0.5}>{color}</button>
+            <button className={isClickedColor===color ? 'clickedColor' : '' } onClick={() => changeColor(color)} key={Math.random() * 0.5}>{color}</button>
           ))}
           <p>Sizes:</p>
           {variantSizes.map((size) => (
-            <button key={Math.random() * 0.5}>{size}</button>
+            <button className={`${findSizes(size) ? '' : 'notAvailable'} ${isClickedSize === size ? 'clickedSize' : ''}`} onClick={() => setClickedSize(size)} key={Math.random() * 0.5}>{size}</button>
           ))}
         </div>
       )}

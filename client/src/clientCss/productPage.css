@@ -1,3 +1,17 @@
+.clickedColor{
+    background-color: gray;
+}
+
+.notAvailable{
+    opacity: 0.3;
+    pointer-events: none;
+
+}
+
+.clickedSize {
+    background-color: gray;
+}
+
 .product-menu{
     cursor: pointer;
     background-color: rgb(104, 96, 96);
