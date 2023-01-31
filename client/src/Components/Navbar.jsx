@@ -7,16 +7,14 @@ import ShoppingCartIcon from "./shoppingCartIcon";
 
 function Navbar(props) {
   const [navbarOpen, setNavbarOpen] = useState(false);
-  
+
   return (
     <div id="navbar">
       <div>
-        <Link to={'/home'}>Home</Link>
+        <Link to={"/home"}>Home</Link>
       </div>
       <div>
-        <Link to={Navbar}>
-          Menu
-        </Link>
+        <Link to={Navbar}>Menu</Link>
       </div>
       <div>
         <Link to={Navbar}>About</Link>
@@ -24,14 +22,16 @@ function Navbar(props) {
       <div>
         {(navbarOpen || props.showCart) && (
           <div className="cart-window">
-            <ShoppingCartDiv  refreshCart={props.refreshCart}/>
+            <ShoppingCartDiv refreshCart={props.refreshCart} />
           </div>
         )}
-
+      </div>
+      <div className="userLog">
+          <p>hello, user</p>
+          <Link to={Home}>Log Out</Link>
       </div>
       <div className="cartNav" onClick={() => setNavbarOpen(!navbarOpen)}>
         <ShoppingCartIcon />
-
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import '../clientCss/checkout.css';
-import { Link, useParams, useNavigate, Outlet } from 'react-router-dom';
+import { Link, useParams, useNavigate, Outlet, json } from 'react-router-dom';
 
 
 
@@ -17,6 +17,8 @@ function CheckOutPage() {
     console.log(date, 'data')
     console.log(city, 'name')
 
+    let totalPrice =  JSON.parse(sessionStorage.getItem('checkoutInfo')) ;
+    
 
 
     const navigate = useNavigate()
@@ -26,14 +28,17 @@ function CheckOutPage() {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                name: name,
+                fullName: name,
+                totalPrice : totalPrice[0].totalPrice ,
+                orderQuantity : totalPrice[0].totalQuantity ,
                 cardNumber: cardNumber,
                 date: date,
-                city: city
+                city: city ,
+                orderNumber : Math.round(Math.random () * 10000)
             })
         })
         const json = await data.json();
-        navigate('/login')
+        navigate('/home')
         // localStorage.setItem('onlineUser', JSON.stringify({username:json[0].username , user_id:json[0].user_id}))
         // setUser(json[0].username);
 
@@ -48,8 +53,8 @@ function CheckOutPage() {
             <div className="item-image">
                 <img src={props.img} />
                 <div className="item-details">
-                    <h3 className="item-name"> {props.name} </h3>
-                    <h2 className="item-price"> {props.price} </h2>
+                    <h3 className="item-name"> number of items: {props.Items}  </h3>
+                    <h2 className="item-price"> {props.price}$ </h2>
                 </div>
             </div>
         </div>
@@ -69,12 +74,13 @@ function CheckOutPage() {
         <button className="checkout-btn" type="button" onClick={handleSubmit}>{props.text}</button>
     );
 
+    console.log('totalPrice[0]: ', totalPrice[0].totalPrice);
 
     return (
         <div className="app-container">
             <div className="row">
                 <div className="col">
-                    <Item name="Instax Mini 90 Neo Classic" price="$1.99" img="http://ecx.images-amazon.com/images/I/61%2BABMMN5zL._SL1500_.jpg" />
+                    <Item name="Instax Mini 90 Neo Classic" price={totalPrice[0].totalPrice} Items={totalPrice[0].totalQuantity}  img="http://ecx.images-amazon.com/images/I/61%2BABMMN5zL._SL1500_.jpg" />
                 </div>
                 <div className="col no-gutters">
                     <div className="checkout">

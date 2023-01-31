@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 
 function ShoppingCartDiv(props) {
   let [totalPrice, setTotalPrice] = useState(0);
+  let [totalQuantity, setTotalQuantity] = useState(0)
   let [sessionStorageItems, setSessionStorageItems] = useState(JSON.parse(sessionStorage.getItem("cart")) || []);
 
   useEffect(() => {
@@ -15,18 +16,25 @@ function ShoppingCartDiv(props) {
   }, [props.refreshCart]);
 
   function navigateToCheckOut() {
-    let obj = JSON.stringify([{ totalPrice }, ...sessionStorageItems]);
+    let obj = JSON.stringify([{ totalPrice , totalQuantity }, ...sessionStorageItems]);
     sessionStorage.setItem("checkoutInfo", obj);
     window.location.assign("/checkout");
   }
 
+
+
   function calculateTotalPrice(storage) {
-    let total = 0;
+    let price = 0;
+    let quantity = 0;
     for (let obj of storage) {
-      total += obj.price * obj.orderQuantity;
+      price += obj.price * obj.orderQuantity;
+      quantity += obj.orderQuantity
+      console.log('quantity: ', quantity);
       console.log(obj);
+      
     }
-    setTotalPrice(total);
+    setTotalPrice(price);
+    setTotalQuantity(quantity);
   }
 
   function deleteFromCart(e) {

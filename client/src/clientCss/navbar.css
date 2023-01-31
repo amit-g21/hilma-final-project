@@ -55,6 +55,12 @@
   position: relative;
   display: inline-block;
   cursor: pointer;
+  
+}
+
+.userLog{
+  display: flex;
+  /* background-color: black */
 }
 
 .shopping-cart-icon {
