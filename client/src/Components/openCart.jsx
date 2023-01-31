@@ -1,9 +1,8 @@
 import React from 'react';
 
-const [navbarOpen, setNavbarOpen] = useState(false);
 
-const ShoppingCart = ({ items, onRemoveItem }) => (
-    
+const ShoppingCart = ({ items, onRemoveItem , props }) => (
+
   <div className="shopping-cart">
     {navbarOpen && (
           <div className="cart-window">

@@ -22,7 +22,11 @@ function Navbar() {
         <Link to={Navbar}>About</Link>
       </div>
       <div className="cartNav" onClick={() => setNavbarOpen(!navbarOpen)}>
-        
+        {navbarOpen && (
+          <div className="cart-window">
+            {/* Render the items in the cart here */}
+          </div>
+        )}
         <ShoppingCartIcon />
 
       </div>

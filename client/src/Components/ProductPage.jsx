@@ -5,6 +5,7 @@ import { useLocation } from "react-router-dom";
 import LoadingLogo from "./Small Components/LoadingLogo";
 import "../clientCss/productPage.css";
 import Footer from "./Footer";
+import ShoppingCart from './shoppingCart'
 
 function ProductPage() {
   const [product, setProduct] = useState([]);
@@ -18,10 +19,12 @@ function ProductPage() {
   const [isClickedSize, setClickedSize] = useState("");
   const [orderQuantity, setOrderQuantity] = useState(1);
 
+  const [navbarOpen, setNavbarOpen] = useState(false);
+
   let location = useLocation();
 
   let urlArr = location.pathname.split("/");
-  let productName = urlArr[urlArr.length - 1];
+  let productName =  decodeURIComponent(urlArr[urlArr.length - 1])  ;
   let collectionName = urlArr[urlArr.length - 2];
   let { image_url, price, product_description } = product[0] || "waiting";
   console.log("product: ", product);
@@ -100,6 +103,8 @@ function ProductPage() {
       dataInlocalStorage.push({productName, price, isClickedColor, isClickedSize, orderQuantity, image_url})
       console.log('dataInlocalStorage: ', dataInlocalStorage);
       sessionStorage.setItem("cart", JSON.stringify(dataInlocalStorage))
+
+
   }
 
   useEffect(() => {
