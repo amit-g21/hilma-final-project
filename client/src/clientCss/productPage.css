@@ -11,3 +11,9 @@
 .clickedSize {
     background-color: gray;
 }
+
+.product-menu{
+    cursor: pointer;
+    background-color: rgb(104, 96, 96);
+    margin: 10px;
+}
