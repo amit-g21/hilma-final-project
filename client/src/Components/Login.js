@@ -1,4 +1,4 @@
-import React , {useState} from 'react';
+import React, { useState } from 'react';
 import { Link, useParams, useNavigate, Outlet } from 'react-router-dom';
 import '../index.css'
 import Cookies from 'js-cookie';
@@ -23,42 +23,42 @@ export default function Login() {
 
     const navigate = useNavigate()
 
-    
+
     const signUp = () => {
         navigate('/signup')
     }
-    
-    const handleSubmit  = async (e) => {
+
+    const handleSubmit = async (e) => {
         const data = await fetch('http://localhost:8000/login/', {
-            method:'POST',
-            headers:{'Content-Type': 'application/json'},
-            body:JSON.stringify({
-                userName:username,
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                userName: username,
                 password: password
             })
         })
         const json = await data.json();
-        if(json.length > 0) {
+        if (json.length > 0) {
             console.log(json);
             // localStorage.setItem('onlineUser', JSON.stringify({username:json[0].username , user_id:json[0].user_id}))
             // setUser(json[0].username);
-            
-            Cookies.set('onlineUser' , JSON.stringify(json[0].username));
+
+            Cookies.set('onlineUser', JSON.stringify(json[0].username));
             navigate(`/home`);
-        }else{
+        } else {
             alert('user not found')
         }
         let currentUser = Cookies.get('onlineUser') || '';
         console.log('currentUser: ', currentUser);
-        let userCur = currentUser.replace(/[' "]+ /g ,'') ;
+        let userCur = currentUser.replace(/[' "]+ /g, '');
         console.log('userCur: ', userCur);
-        if(json[0].username !== userCur ){
+        if (json[0].username !== userCur) {
             sessionStorage.removeItem('cart')
         }
 
-        
-            }
-    
+
+    }
+
     return (
         <MDBContainer fluid className='my-5' style={{ height: 'calc(100vh - 6rem)' }}>
 
@@ -69,10 +69,10 @@ export default function Login() {
                     <MDBCard className='my-5 cascading-right' style={{ background: 'hsla(0, 0%, 100%, 0.55)', backdropFilter: 'blur(30px)' }}>
                         <MDBCardBody className='p-5 text-center'>
 
-                        <h2 className="fw-bold mb-5">Sign in </h2>
+                            <h2 className="fw-bold mb-5">Sign in </h2>
 
                             <MDBInput wrapperClass='mb-4' label='username' id='form1' type='username' value={username} onChange={e => setUsername(e.target.value)} />
-                            <MDBInput wrapperClass='mb-4' label='Password' id='form2' type='password' value={password} onChange={e => setPassword(e.target.value)}/>
+                            <MDBInput wrapperClass='mb-4' label='Password' id='form2' type='password' value={password} onChange={e => setPassword(e.target.value)} />
 
                             <div className="d-flex justify-content-between mx-4 mb-4">
                                 <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' label='Remember me' />
@@ -90,7 +90,7 @@ export default function Login() {
 
                 <MDBCol col='6' className='h-100'>
                     <img src="/images/loginImg.jpg" className="h-100 rounded-4 shadow-4"
-                        alt="" fluid style={{marginRight:30 + '%'}} />
+                        alt="" fluid style={{ marginRight: 30 + '%' }} />
                 </MDBCol>
             </MDBRow>
 

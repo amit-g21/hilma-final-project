@@ -26,8 +26,9 @@ router.get("/", function(req, res, next){
 router.get('/:collectionName', ({ params }, res, next) => {
   let {collectionName} =  params 
   console.log(collectionName);
-  let sql = `SELECT * FROM product JOIN collection ON product.collection_id = collection.id WHERE collection_name = '${collectionName}'`;
+  let sql = `SELECT product.image_url ,product.id, product.product_name,product.image_url FROM product JOIN collection ON product.collection_id = collection.id WHERE collection_name = '${collectionName}'`;
   connection.query(sql, (err, result) => {
+    console.log(result , "fdsfds");
     if (err) console.log(err);
     res.send(result);
   })
@@ -51,6 +52,16 @@ router.get("/:collectionName/:productName", ({ params }, res, next) => {
   connection.query(sql, (err, result) => {
     if (err) console.log(err);
     res.send(result);
+  });
+});
+
+router.put("/", ({ body }, res, next) => {
+  console.log(body.productEdit);
+  let sql = `UPDATE product SET product_name='${body.productName}' , price=${body.productPrice} , product_description='${body.productDescription}' ,image_url='${body.imageUrl}'  WHERE product_name = '${body.productEdit}';`
+  connection.query(sql, (err, result) => {
+    if (err) console.log(err);
+    console.log(result);
+    res.json("product Updated Successfully");
   });
 });
 

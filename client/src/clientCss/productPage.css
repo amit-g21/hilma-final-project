@@ -14,7 +14,7 @@
 
 .product-menu{
     cursor: pointer;
-    background-color: rgb(104, 96, 96);
+    background-color: rgb(255, 255, 255);
     margin: 10px;
 }
 
@@ -47,4 +47,9 @@
 
 .productPage{
     text-align: center;
+}
+
+.imagesin{
+    width: 41vh;
+    height: 40vh;
 }

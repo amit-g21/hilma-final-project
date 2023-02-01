@@ -13,9 +13,19 @@ function AddEditProduct(props) {
   const [productInEditMode, setProductInEditMode] = useState(false);
   const [selectedOption, setSelectedOption] = useState("");
   const [collectionProductsArr, setCollectionProductsArr] = useState([]);
+  const [productName, setProductName] = useState("");
+  const [productPrice, setProductPrice] = useState("");
+  const [productDescription, setProductDescription] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
+  const [productEdit, setProductEdit] = useState("");
+
+
+
+
+
   console.log("collectionProductsArr: ", collectionProductsArr);
 
-  useEffect(() => {}, []);
+  useEffect(() => { }, []);
 
   function sortByCollection(collectionName) {
     let newArr = [];
@@ -44,6 +54,36 @@ function AddEditProduct(props) {
     console.log("shallowArr: ", shallowArr);
     shallowArr[letter] = !shallowArr[letter];
     setSelectedValue(shallowArr);
+  }
+
+  const changeProduct = async (e) => {
+    const data = await fetch(`http://localhost:8000/product/`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        productEdit: productEdit,
+        productName: productName,
+        productPrice: productPrice,
+        productDescription: productDescription,
+        imageUrl: imageUrl,
+      })
+    })
+    const json = await data.json();
+    // localStorage.setItem('onlineUser', JSON.stringify({username:json[0].username , user_id:json[0].user_id}))
+    // setUser(json[0].username);
+    if (json) {
+      alert('all good')
+    }
+
+
+  }
+
+  function onChange(e) {
+    setProductName(e.target.value);
+    if (e.target.id !== productEdit) {
+      console.log('changing')
+      setProductEdit(e.target.id);
+    }
   }
 
   return (
@@ -155,22 +195,14 @@ function AddEditProduct(props) {
                 </div>
               );
             } else {
+
               return (
-                <div key={Math.random()} className="editOneProduct">
+                <div key={product.id} className="editOneProduct">
                   <p>Product's Id: {product.id}</p>
-                  <textarea
-                    placeholder={`Name: ${product.product_name}`}
-                  ></textarea>
-                  <textarea placeholder={`Price: ${product.price}`}></textarea>
-                  <textarea
-                    placeholder={`Collection Name: ${product.collection_name}`}
-                  ></textarea>
-                  <textarea
-                    placeholder={`Description: ${product.product_description}`}
-                  ></textarea>
-                  <textarea
-                    placeholder={`Image Url: ${product.image_url}`}
-                  ></textarea>
+                  <textarea id={product.product_name} placeholder={`Name: ${product.product_name}`} value={productName} onChange={(e) => onChange(e)}></textarea>
+                  <textarea placeholder={`Price: ${product.price}`} value={productPrice} onChange={e => setProductPrice(e.target.value)}></textarea>
+                  <textarea placeholder={`Description: ${product.product_description}`} value={productDescription} onChange={e => setProductDescription(e.target.value)}></textarea>
+                  <textarea placeholder={`Image Url: ${product.image_url}`} value={imageUrl} onChange={e => setImageUrl(e.target.value)}></textarea>
 
                   <button
                     id={`${product.id}`}
@@ -185,9 +217,9 @@ function AddEditProduct(props) {
                       ? `Close Editing`
                       : `Edit Product`}
                   </button>
-                  {productInEditMode && <button>Submit Changes</button>}
+                  {productInEditMode && <button onClick={changeProduct}>Submit Changes</button>}
                   <button>Delete This Product</button>
-                  <hr />
+                  {/* <hr /> */}
                 </div>
               );
             }

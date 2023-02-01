@@ -9,6 +9,8 @@ import GetProductCollections from './Components/collectionProducts';
 import ProductPage from "./Components/ProductPage";
 import CheckOutPage from "./Components/CheckOutPage";
 import AdminHome from "./Components/Admin";
+import ConfirmOrder from "./Components/confirmOrder";
+
 
 function App() {
   return (
@@ -21,6 +23,9 @@ function App() {
         <Route path='/home/:collection/:productName' element={<ProductPage  />} />
         <Route path='/home/:collection' element={<GetProductCollections />} />
         <Route path='/checkout' element={<CheckOutPage />} />
+        <Route path='/confirmorder' element={<ConfirmOrder />} />
+
+        
         
 
 

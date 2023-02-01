@@ -44,6 +44,7 @@ function GetProductCollections() {
 
       <div className="collections-menu">
         {products.map((product) => {
+          console.log(product);
           return <ToProduct key={Math.random()*0.5} product={product} />
         })}
       </div>

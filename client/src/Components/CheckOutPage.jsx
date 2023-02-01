@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import '../clientCss/checkout.css';
 import { Link, useParams, useNavigate, Outlet, json } from 'react-router-dom';
+import ConfirmOrder from './confirmOrder';
 
 
 
@@ -38,7 +39,7 @@ function CheckOutPage() {
             })
         })
         const json = await data.json();
-        navigate('/home');
+        
     }
 
     const Item = (props) => (
@@ -61,9 +62,9 @@ function CheckOutPage() {
         </div>
     );
 
-    const Button = (props) => (
-        <button className="checkout-btn" type="button" onClick={handleSubmit}>{props.text}</button>
-    );
+    // const Button = (props) => (
+    //     <button className="checkout-btn" type="button" onClick={handleSubmit}>{props.text}</button>
+    // );
 
 
     return (
@@ -113,7 +114,8 @@ function CheckOutPage() {
                                     </div>
                                 </div>
                             </div>
-                            <Button text="Place order" />
+                            {/* <Button text="Place order" /> */}
+                            <Link to={'/confirmorder'} className="checkout-btn" type="button" onClick={handleSubmit}>Place order</Link>
                         </div>
                         <div className='total'>
                             <h3 className="item-name"> number of items: {totalPrice[0].totalQuantity}  </h3>
