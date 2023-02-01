@@ -9,26 +9,31 @@ function AdminHome() {
   const [registeredUsers, setregisteredUsers] = useState([]);
   const [infoSelected, setinfoSelected] = useState(false);
   const [actionSelected, setactionSelected] = useState(false);
+  const [ourProducts, setOurProducts] = useState([]);
+  console.log('ourProducts: ', ourProducts);
 
-  let i = 0;
 
   useEffect(() => {
     const fetchOrders = async () => {
       let promise = await fetch("http://localhost:8000/order");
       let result = await promise.json();
-      console.log("result: ", result);
       setMyOrders(result);
     };
 
     const fetchUsers = async () => {
       let promise = await fetch("http://localhost:8000/userInfo");
       let result = await promise.json();
-      console.log("result: ", result);
       setregisteredUsers(result);
     };
 
+    const fetchProducts = async () => {
+      let promise = await fetch("http://localhost:8000/product");
+      let result = await promise.json();
+      setOurProducts(result);
+    };
     fetchOrders();
     fetchUsers();
+    fetchProducts();
   }, []);
 
   function calculateMoneyMade() {
@@ -123,11 +128,13 @@ function AdminHome() {
             Add/Edit A Product
           </p>
           <p id="AddUser" onClick={handleClickAction}>
-            Add A User
+            Edit A Collection
           </p>
         </div>
 
-        {actionSelected === "addProduct" && <AddEditProduct setactionSelected={setactionSelected} />}
+        {actionSelected === "addProduct" && (
+          <AddEditProduct ourProducts={ourProducts} />
+        )}
       </div>
     </div>
   );

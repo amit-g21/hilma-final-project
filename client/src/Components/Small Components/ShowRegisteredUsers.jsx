@@ -18,6 +18,7 @@ function ShowRegisteredUsers(props) {
             <p>Birth Date: {user.birth_date}</p>
             <p>Admin Permissions: {user.is_admin === 1 ? "yes" : "no"}</p>
             <button>Give Admin Permissions</button>
+            <button>Delete User</button>
             <hr />
           </div>
         );

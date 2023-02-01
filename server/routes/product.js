@@ -14,6 +14,15 @@ router.post("/", function ({ body }, res, next) {
   });
 });
 
+router.get("/", function(req, res, next){
+  let sql = `SELECT product.id, product_name, price, product_description, product.image_url, collection.collection_name FROM product JOIN collection ON collection.id = product.collection_id`;
+  connection.query(sql, function (err, result) {
+    if (err) throw err;
+    res.send(result);
+  });
+  
+})
+
 router.get('/:collectionName', ({ params }, res, next) => {
   let {collectionName} =  params 
   console.log(collectionName);
