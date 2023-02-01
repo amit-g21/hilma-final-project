@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from "react";
+import Cookies from "js-cookie";
+
 
 function ShoppingCartDiv(props) {
   let [totalPrice, setTotalPrice] = useState(0);
   let [totalQuantity, setTotalQuantity] = useState(0)
   let [sessionStorageItems, setSessionStorageItems] = useState(JSON.parse(sessionStorage.getItem("cart")) || []);
+  const [userOnline, setUserOnline] = useState('');
+
 
   useEffect(() => {
     if (sessionStorage.getItem('cart')){
@@ -14,6 +18,16 @@ function ShoppingCartDiv(props) {
       sessionStorage.setItem('cart', JSON.stringify([]));
     }
   }, [props.refreshCart]);
+
+  
+
+  useEffect(() => {
+    let user = Cookies.get('onlineUser');
+    if (user) {
+      let online = user.replace(/['"]+/g, '');
+      setUserOnline(online);
+    }
+  }, [])
 
   function navigateToCheckOut() {
     let obj = JSON.stringify([{ totalPrice , totalQuantity }, ...sessionStorageItems]);
@@ -60,7 +74,7 @@ function ShoppingCartDiv(props) {
       <p>Keep On Buying...</p>
       <hr />
       <div className="shopping-cart-content">
-        {sessionStorageItems.length > 0 &&
+        {sessionStorageItems.length > 0 && userOnline &&
           sessionStorageItems.map((cartItem) => (
             <div key={Math.random() * 0.5}>
               <div className="cartProduct">

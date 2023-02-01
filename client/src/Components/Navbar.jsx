@@ -5,11 +5,13 @@ import "../clientCss/navbar.css";
 import Home from "./HomePage";
 import ShoppingCartDiv from "./ShoppingCartDiv";
 import ShoppingCartIcon from "./shoppingCartIcon";
+import MenuDiv from "./MenuDiv";
 
 
 function Navbar(props) {
   const [navbarOpen, setNavbarOpen] = useState(false);
   const [userOnline, setUserOnline] = useState('');
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     let user = Cookies.get('onlineUser');
@@ -24,13 +26,16 @@ function Navbar(props) {
     window.location.reload();
   }
 
+  // onMouseEnter={() => setMenuOpen(true)} onMouseLeave={() => setMenuOpen(false)}
+
   return (
     <div id="navbar">
       <div>
         <Link to={"/home"}>Home</Link>
       </div>
-      <div>
-        <Link to={Navbar}>Menu</Link>
+      <div >
+        <div onClick={() => setMenuOpen(!menuOpen)}>menu</div>
+        {menuOpen && <div className="menu-window"><MenuDiv /></div> }
       </div>
       <div>
         <Link to={Navbar}>About</Link>
@@ -48,7 +53,7 @@ function Navbar(props) {
         </div>
         <div className="logOut">
           {/* <Link to={Home}>Log Out</Link> */}
-          <span>{userOnline ? <Link to={'/home'} onClick={removeCookie}>Log Out</Link>  : <Link to={'/signUp'}>Sign up</Link> }</span>
+          <span>{userOnline ? <Link to={'/home'} onClick={removeCookie}>Log Out</Link> : <Link to={'/signUp'}>Sign up</Link>}</span>
         </div>
       </div>
 

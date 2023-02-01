@@ -108,6 +108,24 @@
   padding: 10px;
 }
 
+.menu-window {
+  text-align: center;
+  cursor: auto;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  color: black;
+  position: absolute;
+  left: 5%;
+  top: 60px;
+  width: 200px;
+  z-index: 10;
+  padding: 10px;
+}
+
+.menu-content{
+  z-index: 10;
+  
+}
 
 #XContainer {
   height: 1.3vh;

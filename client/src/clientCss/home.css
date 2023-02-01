@@ -10,8 +10,8 @@
     display: flex; 
     align-items: center;
     justify-content: center;
-    flex-direction: row;
-    height: 35vh;
+    flex-direction: column;
+    height: 50vh;
     width: 40vw;
 }
 
@@ -36,3 +36,54 @@
 .imageHome{
     height: 30vh;
 }
+
+.containerall{
+    display: flex;
+    justify-content: center;
+    margin-top:10%;
+    height: 62vh;
+}
+
+.commentsConntainer{
+    text-align: center;
+    box-shadow:  0 0 20px 20px;
+    color :black;
+    width: 40%;
+    height: 46vh;
+    overflow: hidden;
+    
+}
+
+
+/* .commentsimage{
+    width: 100%;
+    
+} */
+
+.image_slider {
+    margin-top: 10%;
+    position: relative;
+    height: 70vh;
+    /* height: 300px; */
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .slider-image {
+    position: absolute;
+    height: 55vh;
+    left: 110%;
+    transition: left 0.5s;
+    box-shadow: 5px 5px 5px 5px rgb(112, 105, 105);
+  }
+  
+  .current {
+    left: 37vw;
+  }
+
+  .buttonNext{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 5%;
+  }
