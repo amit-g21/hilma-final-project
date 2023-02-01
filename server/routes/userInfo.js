@@ -1,26 +1,33 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
-let connection = require('../modules/connection');
+let connection = require("../modules/connection");
 
+router.get("/", function (req, res, nex) {
+  let sql = "SELECT * FROM user;";
+  connection.query(sql, function (err, result) {
+    if (err) throw err;
+    res.json(result);
+  });
+});
 
-router.post('/', function({body}, res, next) {
+router.post("/", function ({ body }, res, next) {
   console.log(body);
-  let sql = `INSERT INTO user (username, full_name ,phone_number,email,birth_date,address,is_admin ) VALUES ('${body.username}','${body.fullName}','${body.phoneNumber}','${body.email}', DATE '${body.birthDate}','${body.address}',${body.isAdmin});`
-  connection.query(sql, function(err, result) {
+  let sql = `INSERT INTO user (username, full_name ,phone_number,email,birth_date,address,is_admin ) VALUES ('${body.username}','${body.fullName}','${body.phoneNumber}','${body.email}', DATE '${body.birthDate}','${body.address}',${body.isAdmin});`;
+  connection.query(sql, function (err, result) {
     if (err) throw err;
     // res.send('added user');
     let newSql = `SELECT id FROM user WHERE username = '${body.username}'`;
-    connection.query(newSql, function(err, result) {
+    connection.query(newSql, function (err, result) {
       if (err) throw err;
       console.log(result);
       let finalSql = `INSERT INTO user_password (user_id, password) VALUES (${result[0].id},'${body.password}')`;
-      connection.query(finalSql, function(err, result) {
+      connection.query(finalSql, function (err, result) {
         if (err) throw err;
-        res.json('User added successfully');
-      })
-    })
-  })
-})
+        res.json("User added successfully");
+      });
+    });
+  });
+});
 
 // router.post('/', function ({ body }, res, next) {
 //   connection.query(`select;`, function (err, result) {

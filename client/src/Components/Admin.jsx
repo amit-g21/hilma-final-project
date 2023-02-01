@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from "react";
 import "../clientCss/adminHomePage.css";
+import ShowRegisteredUsers from "./Small Components/ShowRegisteredUsers";
+import ShowOrders from "./Small Components/ShowOrders";
+import AddEditProduct from "./Small Components/AddEditProduct";
 
 function AdminHome() {
   const [myOrders, setMyOrders] = useState([]);
   const [registeredUsers, setregisteredUsers] = useState([]);
   const [infoSelected, setinfoSelected] = useState(false);
   const [actionSelected, setactionSelected] = useState(false);
+
   let i = 0;
 
   useEffect(() => {
@@ -106,66 +110,65 @@ function AdminHome() {
         </h4>
       )}
 
-      {infoSelected === "showOrders" && <h4>Your Orders:</h4>}
-      {infoSelected === "showOrders" &&
-        myOrders.map((order) => {
-          i++;
-          return (
-            <div className="oneOrder" key={Math.random()}>
-              <p>Number: {i}</p>
-              <p>Order's Number: {order.order_number}</p>
-              <p>Customer's Name: {order.full_name}</p>
-              <p>Price Paid: {order.total_price}$</p>
-              <p>Adress: {order.city}</p>
-              <hr />
-            </div>
-          );
-        })}
+      {infoSelected === "showOrders" && <ShowOrders myOrders={myOrders} />}
 
-      <div className="registeredUsers">
-        {infoSelected === "registeredUsers" && <h4>registeredUsers:</h4>}
-        {infoSelected === "registeredUsers" &&
-          registeredUsers.map((user) => {
-            i++;
-            return (
-              <div key={Math.random() * 1000}>
-                <p>Number: {i}</p>
-                <p>Full Name: {user.full_name}</p>
-                <p>User Name: {user.username}</p>
-                <p>Birth Date: {user.birth_date}</p>
-                <p>Admin Permissions: {user.is_admin === 1 ? "yes" : "no"}</p>
-                <hr />
-              </div>
-            );
-          })}
-      </div>
+      {infoSelected === "registeredUsers" && (
+        <ShowRegisteredUsers registeredUsers={registeredUsers} />
+      )}
+
       <div className="actionsMenu">
         <h3>Some Actions You Can Take:</h3>
         <div className="showStoreInfo">
           <p id="addProduct" onClick={handleClickAction}>
-            Add A Product
-          </p>
-          <p id="givePermission" onClick={handleClickAction}>
-            Give/Remove Admin Permission
+            Add/Edit A Product
           </p>
           <p id="AddUser" onClick={handleClickAction}>
             Add A User
           </p>
         </div>
-        {actionSelected === "addProduct" && <div className="AddProductInputs">
-          <input placeholder="Product Name"/><br/>
-          <p>Variants:</p>
-          <input placeholder="Variant"/><br/>
-          <button>Add Variant</button>
-          
 
-
-          </div>}
-        
-        
+        {actionSelected === "addProduct" && <AddEditProduct setactionSelected={setactionSelected} />}
       </div>
     </div>
   );
 }
+
+// import React, { useState } from 'react';
+
+// function RadioButtons() {
+// const [selectedValue, setSelectedValue] = useState('S');
+
+// function handleRadioChange(event) {
+//   setSelectedValue(event.target.value);
+// }
+
+//   return (
+// <div>
+//   <input
+//     type="radio"
+//     value="S"
+//     checked={selectedValue === 'S'}
+//     onChange={handleRadioChange}
+//   />
+//   <label>S</label>
+
+//   <input
+//     type="radio"
+//     value="M"
+//     checked={selectedValue === 'M'}
+//     onChange={handleRadioChange}
+//   />
+//   <label>M</label>
+
+//   <input
+//     type="radio"
+//     value="L"
+//     checked={selectedValue === 'L'}
+//     onChange={handleRadioChange}
+//   />
+//   <label>L</label>
+// </div>
+//   );
+// }
 
 export default AdminHome;
