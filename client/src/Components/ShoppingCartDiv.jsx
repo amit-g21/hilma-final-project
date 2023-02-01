@@ -76,7 +76,7 @@ function ShoppingCartDiv(props) {
                 </div>
                 <div className="cartImageContainer">
                   <img id="productImage" src={cartItem.image_url} />
-                  <div id="XContainer">
+                  <div className="XContainer">
                     <img
                       onClick={deleteFromCart}
                       name={JSON.stringify(cartItem)}

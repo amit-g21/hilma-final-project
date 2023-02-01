@@ -11,37 +11,28 @@ function AddEditProduct(props) {
   const [products, editProducts] = useState(props.ourProducts);
   const [toEditProduct, toggleToEditProduct] = useState(false);
   const [productInEditMode, setProductInEditMode] = useState(false);
-  const [myCollection, setMyCollection] = useState([]);
   const [selectedOption, setSelectedOption] = useState("");
-  const [collectionProductsArr, setCollectionProductsArr] = useState([])
-  console.log('collectionProductsArr: ', collectionProductsArr);
+  const [collectionProductsArr, setCollectionProductsArr] = useState([]);
+  console.log("collectionProductsArr: ", collectionProductsArr);
 
-  useEffect(() => {
-    const fetchCollections = async () => {
-      let promise = await fetch("http://localhost:8000/collection");
-      let result = await promise.json();
-      setMyCollection(result);
-    };
-    fetchCollections();
-  }, []);
+  useEffect(() => {}, []);
 
   function sortByCollection(collectionName) {
-    let newArr = []
-    for(let product of products){
-      console.log('collection_name: ', product.collection_name);
-      product.collection_name === collectionName && newArr.push(product)
+    let newArr = [];
+    for (let product of products) {
+      console.log("collection_name: ", product.collection_name);
+      product.collection_name === collectionName && newArr.push(product);
     }
-    setCollectionProductsArr(newArr)
+    setCollectionProductsArr(newArr);
   }
 
-
   function handleChange(event) {
-    if(event.target.value === 'All'){
-      console.log('ALL')
-      let shallowCopy = [...products]
-      setCollectionProductsArr(shallowCopy)
+    if (event.target.value === "All") {
+      console.log("ALL");
+      let shallowCopy = [...products];
+      setCollectionProductsArr(shallowCopy);
       setSelectedOption(event.target.value);
-    } else{
+    } else {
       setSelectedOption(event.target.value);
       sortByCollection(event.target.value);
     }
@@ -128,16 +119,16 @@ function AddEditProduct(props) {
         {toEditProduct && <h6>Filter By Collection:</h6>}
         {toEditProduct && (
           <select value={selectedOption} onChange={handleChange}>
-            {myCollection.map((collection) => {
+            {props.myCollections.map((collection) => {
               return (
                 <option key={Math.random()} value={collection.collection_name}>
                   {collection.collection_name}
                 </option>
               );
             })}
-            <option key={Math.random()} value={'All'}>
-                  All Collections
-                </option>
+            <option key={Math.random()} value={"All"}>
+              All Collections
+            </option>
           </select>
         )}
         {selectedOption &&

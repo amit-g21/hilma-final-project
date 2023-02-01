@@ -3,6 +3,7 @@ import "../clientCss/adminHomePage.css";
 import ShowRegisteredUsers from "./Small Components/ShowRegisteredUsers";
 import ShowOrders from "./Small Components/ShowOrders";
 import AddEditProduct from "./Small Components/AddEditProduct";
+import AddEditCollection from "./Small Components/AddEditCollection";
 
 function AdminHome() {
   const [myOrders, setMyOrders] = useState([]);
@@ -10,8 +11,8 @@ function AdminHome() {
   const [infoSelected, setinfoSelected] = useState(false);
   const [actionSelected, setactionSelected] = useState(false);
   const [ourProducts, setOurProducts] = useState([]);
-  console.log('ourProducts: ', ourProducts);
-
+  const [myCollections, setMyCollection] = useState([])
+  console.log("ourProducts: ", ourProducts);
 
   useEffect(() => {
     const fetchOrders = async () => {
@@ -31,6 +32,14 @@ function AdminHome() {
       let result = await promise.json();
       setOurProducts(result);
     };
+
+    const fetchCollections = async () => {
+      let promise = await fetch("http://localhost:8000/collection");
+      let result = await promise.json();
+      setMyCollection(result);
+    };
+
+    fetchCollections();
     fetchOrders();
     fetchUsers();
     fetchProducts();
@@ -83,10 +92,10 @@ function AdminHome() {
       }
     }
 
-    if (e.target.id === "AddUser") {
-      if (actionSelected === "AddUser") setactionSelected(false);
+    if (e.target.id === "addEditCollection") {
+      if (actionSelected === "addEditCollection") setactionSelected(false);
       else {
-        setactionSelected("AddUser");
+        setactionSelected("addEditCollection");
       }
     }
     console.log(actionSelected);
@@ -127,14 +136,17 @@ function AdminHome() {
           <p id="addProduct" onClick={handleClickAction}>
             Add/Edit A Product
           </p>
-          <p id="AddUser" onClick={handleClickAction}>
+          <p id="addEditCollection" onClick={handleClickAction}>
             Edit A Collection
           </p>
         </div>
-
         {actionSelected === "addProduct" && (
-          <AddEditProduct ourProducts={ourProducts} />
+          <AddEditProduct myCollections={myCollections} ourProducts={ourProducts} />
         )}
+        {actionSelected === "addEditCollection" && (
+          <AddEditCollection myCollections={myCollections} />
+        )}
+        ;
       </div>
     </div>
   );

@@ -21,6 +21,7 @@ function App() {
         <Route path='/home/:collection/:productName' element={<ProductPage  />} />
         <Route path='/home/:collection' element={<GetProductCollections />} />
         <Route path='/checkout' element={<CheckOutPage />} />
+        
 
 
         {/* ADMIN ROUTES */}
