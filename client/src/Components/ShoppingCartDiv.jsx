@@ -74,7 +74,7 @@ function ShoppingCartDiv(props) {
       <p>Keep On Buying...</p>
       <hr />
       <div className="shopping-cart-content">
-        {sessionStorageItems.length > 0 && userOnline &&
+        {sessionStorageItems.length > 0  &&
           sessionStorageItems.map((cartItem) => (
             <div key={Math.random() * 0.5}>
               <div className="cartProduct">

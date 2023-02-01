@@ -23,10 +23,11 @@ export default function Login() {
 
     const navigate = useNavigate()
 
+    
     const signUp = () => {
         navigate('/signup')
     }
-
+    
     const handleSubmit  = async (e) => {
         const data = await fetch('http://localhost:8000/login/', {
             method:'POST',
@@ -37,19 +38,27 @@ export default function Login() {
             })
         })
         const json = await data.json();
-        console.log(json);
         if(json.length > 0) {
             console.log(json);
             // localStorage.setItem('onlineUser', JSON.stringify({username:json[0].username , user_id:json[0].user_id}))
             // setUser(json[0].username);
+            
             Cookies.set('onlineUser' , JSON.stringify(json[0].username));
             navigate(`/home`);
         }else{
             alert('user not found')
         }
+        let currentUser = Cookies.get('onlineUser') || '';
+        console.log('currentUser: ', currentUser);
+        let userCur = currentUser.replace(/[' "]+ /g ,'') ;
+        console.log('userCur: ', userCur);
+        if(json[0].username !== userCur ){
+            sessionStorage.removeItem('cart')
+        }
 
-    }
-
+        
+            }
+    
     return (
         <MDBContainer fluid className='my-5' style={{ height: 'calc(100vh - 6rem)' }}>
 
