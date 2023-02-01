@@ -1,0 +1,13 @@
+.showStoreInfo{
+    display: flex;
+    justify-content: space-around;
+}
+
+.showStoreInfo p{
+    cursor: pointer;
+}
+
+.XContainer img{
+    height: 100%;
+    cursor: pointer;
+}
