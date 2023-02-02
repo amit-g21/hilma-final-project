@@ -106,7 +106,7 @@ function ProductPage() {
       toggleShowCart(true);
       setTimeout(() => {
         toggleShowCart(false)
-      }, 2000);
+      }, 8000);
       toggleRefreshCart(!refreshCart);
   }
 

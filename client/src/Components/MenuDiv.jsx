@@ -19,7 +19,7 @@ function MenuDiv() {
                 <hr />
                 <div onClick={() => clickCol('shoes')}>shoes</div>
                 <hr />
-                <div onClick={() => clickCol('baskts')}>baskts</div>
+                <div onClick={() => clickCol('baskets')}>baskts</div>
                 <hr />
                 <div onClick={() => clickCol('basketballs')}>basketballs</div>
 

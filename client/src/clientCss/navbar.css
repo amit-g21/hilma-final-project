@@ -110,7 +110,7 @@
 
 .menu-window {
   text-align: center;
-  cursor: auto;
+  cursor: pointer;
   background-color: #fff;
   border: 1px solid #ddd;
   color: black;
@@ -120,6 +120,10 @@
   width: 200px;
   z-index: 10;
   padding: 10px;
+}
+
+#menuBtn {
+  cursor: pointer;
 }
 
 .menu-content{

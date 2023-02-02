@@ -46,7 +46,7 @@ function Navbar(props) {
         <Link to={"/home"}>Home</Link>
       </div>
       <div >
-        <div onClick={() => setMenuOpen(!menuOpen)}>menu</div>
+        <div id="menuBtn" onClick={() => setMenuOpen(!menuOpen)}>menu</div>
         {menuOpen && <div className="menu-window"><MenuDiv /></div> }
       </div>
       <div>

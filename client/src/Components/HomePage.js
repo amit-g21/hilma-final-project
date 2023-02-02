@@ -23,7 +23,7 @@ function Home() {
     setCurrentImage(currentImage === images.length - 1 ? 0 : currentImage + 1);
   };
 
-  setTimeout(() => handleNext(), 4000);
+  setTimeout(() => handleNext(), 6000);
 
   // setInterval(() => {
   //   setCurrentImage(currentImage === images.length - 1 ? 0 : currentImage + 1);
